@@ -1,4 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { playbooks } from '../data/vision';
 ---
-<BaseLayout><h1>行业方案手册</h1><div class="card"><h2>电子制造</h2><p>PCB、连接器、零件外观检测：稳定光学优先，再选择算法。</p></div><div class="card"><h2>新能源</h2><p>极片、焊缝、尺寸、表面缺陷检测。</p></div><div class="card"><h2>机械加工</h2><p>尺寸测量、孔位检测、装配确认。</p></div></BaseLayout>
+<BaseLayout title="行业方案" description="工业视觉行业方案手册">
+  <section class="hero">
+    <span class="kicker">Playbooks</span>
+    <h1>行业方案手册</h1>
+    <p class="hero-subtitle">按行业整理典型检测场景、最小方案、生产方案和项目风险。</p>
+  </section>
+  <section class="section">
+    <div class="grid">
+      {playbooks.map(p => (
+        <article class="card">
+          <span class="tag">{p.industry}</span>
+          <h2>{p.title}</h2>
+          <p><strong>场景：</strong>{p.scenes.join('、')}</p>
+          <p><strong>最小方案：</strong>{p.minimal.join(' + ')}</p>
+          <p><strong>生产方案：</strong>{p.production.join('；')}</p>
+          <p><strong>风险：</strong>{p.risk.join('；')}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
