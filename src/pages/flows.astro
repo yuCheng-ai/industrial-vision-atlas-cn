@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { flows } from '../data/vision';
+---
+<BaseLayout title="选型流程" description="工业视觉静态选型流程">
+  <section class="hero">
+    <span class="kicker">Selection Flow</span>
+    <h1>工业视觉选型流程</h1>
+    <p class="hero-subtitle">不要从相机品牌开始，先把检测目标、工件特性、光学方案和验收指标拆清楚。</p>
+  </section>
+  <section class="section">
+    {flows.map((f, i) => (
+      <article class="flow">
+        <div class="flow-num">{i + 1}</div>
+        <div>
+          <h3>{f.title}</h3>
+          <p><strong>问题：</strong>{f.question}</p>
+          <p><strong>输出：</strong>{f.output}</p>
+        </div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>
