@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {glossary} from '../data/vision';
+---
+<BaseLayout><h1>工业视觉术语</h1><div class="grid">{glossary.map(g=><div class="card"><h2>{g[0]}</h2><p>{g[1]}</p></div>)}</div></BaseLayout>
