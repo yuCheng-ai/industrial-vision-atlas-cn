@@ -1,12 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { glossary } from '../data/vision';
+import { withBase } from '../consts';
 ---
 <BaseLayout title="术语表" description="工业视觉术语解释">
   <section class="hero">
     <span class="kicker">Glossary</span>
     <h1>工业视觉术语表</h1>
-    <p class="hero-subtitle">把常见参数和英文缩写翻译成工程语言。</p>
+    <p class="hero-subtitle">整理常见参数、英文缩写和工程术语。</p>
+  </section>
+  <section class="section">
+    <a class="card feature-link" href={withBase('models/')}>
+      <h2>模型选型</h2>
+      <p>查看目标检测、分割、OCR、异常检测和 3D 算法相关术语的应用位置。</p>
+    </a>
   </section>
   <section class="section">
     <div class="grid">
