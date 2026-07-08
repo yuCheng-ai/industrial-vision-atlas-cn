@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { cameraGroups } from '../data/knowledge';
+---
+<BaseLayout title="相机与传感器" description="工业相机和传感器参数资料">
+  <section class="hero">
+    <span class="kicker">Cameras & Sensors</span>
+    <h1>相机与传感器</h1>
+    <p class="hero-subtitle">整理工业相机类型和关键性能参数。相机参数应结合视野、精度、运动、接口和光照条件理解。</p>
+  </section>
+  {cameraGroups.map(group => (
+    <section class="section">
+      <h2 class="section-title">{group.title}</h2>
+      <p class="section-lead">{group.intro}</p>
+      <div class="grid">
+        {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">来源：{item.source}</p></article>)}
+      </div>
+    </section>
+  ))}
+</BaseLayout>
