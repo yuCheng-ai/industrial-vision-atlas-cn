@@ -9,14 +9,16 @@ export interface Props {
 const { title, description } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
 const pageDesc = description ?? '工业视觉信息资料库：成像、光学、相机、接口、算法、术语和资料来源。';
+const anchor = (id: string) => `${withBase('')}#${id}`;
 const navItems = [
-  ['总览', ''],
-  ['成像光学', 'optics/'],
-  ['相机传感器', 'cameras/'],
-  ['接口标准', 'interfaces/'],
-  ['算法模型', 'models/'],
-  ['场景资料', 'scenarios/'],
-  ['资料来源', 'sources/'],
+  ['总览', anchor('overview')],
+  ['系统', anchor('system')],
+  ['光学', anchor('optics')],
+  ['相机', anchor('cameras')],
+  ['接口', anchor('interfaces')],
+  ['算法', anchor('algorithms')],
+  ['场景', anchor('scenarios')],
+  ['来源', anchor('sources')],
 ];
 ---
 <html lang="zh-CN">
@@ -31,7 +33,7 @@ const navItems = [
       <nav class="nav">
         <a class="logo" href={withBase('')}>{SITE_TITLE}</a>
         <div class="nav-links">
-          {navItems.map(([label, href]) => <a href={withBase(href)}>{label}</a>)}
+          {navItems.map(([label, href]) => <a href={href}>{label}</a>)}
         </div>
       </nav>
       <main><slot /></main>
