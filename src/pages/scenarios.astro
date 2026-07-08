@@ -1,19 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { scenarios } from '../data/vision';
-import { withBase } from '../consts';
 ---
 <BaseLayout title="检测场景" description="工业视觉检测场景选型">
   <section class="hero">
     <span class="kicker">Scenarios</span>
     <h1>检测场景选型</h1>
-    <p class="hero-subtitle">先看检测目标，再选成像、光源、镜头、相机和算法。</p>
-  </section>
-  <section class="section">
-    <a class="card feature-link" href={withBase('models/')}>
-      <h2>模型选型</h2>
-      <p>查看目标检测、分割、OCR、异常检测、辅助标注和 3D 算法路线。</p>
-    </a>
+    <p class="hero-subtitle">按检测目标组织场景，记录对应的成像方式、光源、镜头、相机、算法和验收指标。</p>
   </section>
   <section class="section">
     <div class="grid">
