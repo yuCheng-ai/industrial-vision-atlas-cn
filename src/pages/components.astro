@@ -1,5 +1,24 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import {components} from '../data/vision';
+import { components } from '../data/vision';
 ---
-<BaseLayout><h1>视觉组件选型</h1><div class="grid">{components.map(c=><div class="card"><h2>{c.type}</h2><p>关键参数：{c.key}</p>{c.choices.map(x=><span class="tag">{x}</span>)}</div>)}</div></BaseLayout>
+<BaseLayout title="组件选型" description="工业视觉相机、镜头、光源、接口、算法选型">
+  <section class="hero">
+    <span class="kicker">Components</span>
+    <h1>视觉组件选型</h1>
+    <p class="hero-subtitle">工业视觉组件不是孤立采购，要按场景、光学和节拍组合。</p>
+  </section>
+  <section class="section">
+    <div class="grid">
+      {components.map(c => (
+        <article class="card">
+          <h2>{c.type}</h2>
+          <p><strong>关键参数：</strong>{c.key}</p>
+          <p><strong>适合：</strong>{c.goodFor.join('、')}</p>
+          <div>{c.choices.map(x => <span class="tag">{x}</span>)}</div>
+          <p><strong>选型提醒：</strong>{c.selectionTips.join('；')}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
