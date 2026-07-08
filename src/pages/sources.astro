@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sourceGroups } from '../data/knowledge';
+---
+<BaseLayout title="资料来源" description="工业视觉资料来源与引用依据">
+  <section class="hero">
+    <span class="kicker">Sources</span>
+    <h1>资料来源</h1>
+    <p class="hero-subtitle">资料库优先参考标准组织、行业协会、官方文档和主流厂商知识库。页面内容应尽量注明信息来源，避免把经验判断写成标准结论。</p>
+  </section>
+  {sourceGroups.map(group => (
+    <section class="section">
+      <h2 class="section-title">{group.title}</h2>
+      <p class="section-lead">{group.intro}</p>
+      <div class="grid">
+        {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">{item.source}</p></article>)}
+      </div>
+    </section>
+  ))}
+</BaseLayout>
