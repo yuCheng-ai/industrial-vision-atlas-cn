@@ -1,0 +1,15 @@
+---
+import {SITE_TITLE, withBase} from '../consts';
+import '../styles/global.css';
+---
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>{SITE_TITLE}</title>
+</head>
+<body>
+<nav><a href={withBase('')}>{SITE_TITLE}</a> | <a href={withBase('scenarios/')}>场景</a> | <a href={withBase('components/')}>组件</a> | <a href={withBase('playbooks/')}>方案</a></nav>
+<main><slot /></main>
+</body>
+</html>
