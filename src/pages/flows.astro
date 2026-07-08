@@ -1,19 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { flows } from '../data/vision';
-import { withBase } from '../consts';
 ---
 <BaseLayout title="选型流程" description="工业视觉静态选型流程">
   <section class="hero">
     <span class="kicker">Selection Flow</span>
     <h1>工业视觉选型流程</h1>
-    <p class="hero-subtitle">先明确检测目标、工件特性、光学方案和验收指标，再确定组件与算法路线。</p>
-  </section>
-  <section class="section">
-    <a class="card feature-link" href={withBase('models/')}>
-      <h2>模型选型</h2>
-      <p>在流程判断完成后，按任务选择规则视觉、目标检测、分割、OCR、异常检测或 3D 算法。</p>
-    </a>
+    <p class="hero-subtitle">从检测目标开始，依次确认工件特性、视野精度、成像方案、算法路线和部署验收。</p>
   </section>
   <section class="section">
     {flows.map((f, i) => (
