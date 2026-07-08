@@ -1,5 +1,29 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import {scenarios} from '../data/vision';
+import { scenarios } from '../data/vision';
 ---
-<BaseLayout><h1>检测场景</h1><div class="grid">{scenarios.map(s=><div class="card"><h2>{s.title}</h2><p>{s.route}</p>{s.items.map(i=><span class="tag">{i}</span>)}</div>)}</div></BaseLayout>
+<BaseLayout title="检测场景" description="工业视觉检测场景选型">
+  <section class="hero">
+    <span class="kicker">Scenarios</span>
+    <h1>检测场景选型</h1>
+    <p class="hero-subtitle">先看检测目标，再选成像、光源、镜头、相机和算法。</p>
+  </section>
+  <section class="section">
+    <div class="grid">
+      {scenarios.map(s => (
+        <article class="card">
+          <span class="tag">{s.category}</span>
+          <h2>{s.title}</h2>
+          <p><strong>对象：</strong>{s.items.join('、')}</p>
+          <p><strong>路线：</strong>{s.route}</p>
+          <p><strong>成像：</strong>{s.imaging}</p>
+          <p><strong>光源：</strong>{s.lighting}</p>
+          <p><strong>相机：</strong>{s.camera}</p>
+          <p><strong>镜头：</strong>{s.lens}</p>
+          <p><strong>算法：</strong>{s.algorithm}</p>
+          <p><strong>验收：</strong>{s.acceptance.join('、')}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
