@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { modelFamilies, modelSelectionRules } from '../data/models';
+---
+<BaseLayout title="模型选型" description="工业视觉模型和算法路线选型">
+  <section class="hero">
+    <span class="kicker">Model Selection</span>
+    <h1>模型不是越新越好，要按检测任务选</h1>
+    <p class="hero-subtitle">工业视觉模型选型先看任务：测量、检测、分割、OCR、异常检测、定位、3D。能用稳定光学和规则算法解决的，不要先上大模型。</p>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">场景 → 模型路线</h2>
+    <div class="matrix">
+      <table>
+        <thead><tr><th>场景</th><th>优先路线</th><th>提醒</th></tr></thead>
+        <tbody>
+          {modelSelectionRules.map(row => <tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td></tr>)}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">模型家族</h2>
+    <div class="grid">
+      {modelFamilies.map(m => (
+        <article class="card">
+          <span class="tag">{m.category}</span>
+          <h2>{m.name}</h2>
+          <p><strong>适合：</strong>{m.bestFor.join('、')}</p>
+          <p><strong>常见模型：</strong>{m.typicalModels.join('、')}</p>
+          <p><strong>何时使用：</strong>{m.useWhen.join('；')}</p>
+          <p><strong>不适合：</strong>{m.avoidWhen.join('；')}</p>
+          <p><strong>数据要求：</strong>{m.dataNeed}</p>
+          <p><strong>部署：</strong>{m.deployment.join('、')}</p>
+          <p>{m.note}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
