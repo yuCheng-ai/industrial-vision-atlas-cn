@@ -8,14 +8,14 @@ export interface Props {
 }
 const { title, description } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
-const pageDesc = description ?? '工业视觉选型地图：从检测场景出发，选择光源、镜头、相机、算法和部署方案。';
+const pageDesc = description ?? '工业视觉选型工程手册：检测场景、成像条件、光源、镜头、相机、算法和部署方案。';
 const navItems = [
   ['场景', 'scenarios/'],
   ['组件', 'components/'],
   ['模型', 'models/'],
   ['流程', 'flows/'],
   ['方案', 'playbooks/'],
-  ['误区', 'mistakes/'],
+  ['问题', 'mistakes/'],
   ['术语', 'glossary/'],
 ];
 ---
@@ -35,7 +35,7 @@ const navItems = [
         </div>
       </nav>
       <main><slot /></main>
-      <footer class="footer">© 2026 Industrial Vision Atlas CN · 纯静态工业视觉选型手册</footer>
+      <footer class="footer">© 2026 Industrial Vision Atlas CN · 工业视觉选型工程手册</footer>
     </div>
   </body>
 </html>
