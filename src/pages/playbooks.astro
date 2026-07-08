@@ -1,12 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { playbooks } from '../data/vision';
+import { withBase } from '../consts';
 ---
 <BaseLayout title="行业方案" description="工业视觉行业方案手册">
   <section class="hero">
     <span class="kicker">Playbooks</span>
     <h1>行业方案手册</h1>
     <p class="hero-subtitle">按行业整理典型检测场景、最小方案、生产方案和项目风险。</p>
+  </section>
+  <section class="section">
+    <a class="card feature-link" href={withBase('models/')}>
+      <h2>模型选型</h2>
+      <p>查看不同行业方案中常用的检测、分割、OCR、异常检测和 3D 算法路线。</p>
+    </a>
   </section>
   <section class="section">
     <div class="grid">
