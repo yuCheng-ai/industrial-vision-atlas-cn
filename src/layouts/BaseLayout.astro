@@ -10,21 +10,11 @@ const { title, description } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
 const pageDesc = description ?? '工业视觉选型工程手册：检测场景、成像条件、光源、镜头、相机、算法和部署方案。';
 const navItems = [
-  ['场景', 'scenarios/'],
-  ['组件', 'components/'],
-  ['模型选型', 'models/'],
-  ['流程', 'flows/'],
-  ['方案', 'playbooks/'],
-  ['问题', 'mistakes/'],
-  ['术语', 'glossary/'],
-];
-const moduleLinks = [
-  ['检测场景', 'scenarios/', '典型检测任务和成像路线'],
-  ['组件选型', 'components/', '相机、镜头、光源、接口和部署组件'],
-  ['模型选型', 'models/', '目标检测、分割、OCR、异常检测和 3D 算法路线'],
-  ['选型流程', 'flows/', '从需求到验收的判断步骤'],
-  ['行业方案', 'playbooks/', '按行业整理方案组合和项目风险'],
-  ['常见问题', 'mistakes/', '现场选型和项目实施中的常见问题'],
+  ['选型流程', 'flows/'],
+  ['检测场景', 'scenarios/'],
+  ['组件选型', 'components/'],
+  ['算法路线', 'models/'],
+  ['行业方案', 'playbooks/'],
 ];
 ---
 <html lang="zh-CN">
@@ -43,12 +33,6 @@ const moduleLinks = [
         </div>
       </nav>
       <main><slot /></main>
-      <section class="module-nav" aria-label="站点模块">
-        <h2>站点模块</h2>
-        <div class="module-grid">
-          {moduleLinks.map(([label, href, desc]) => <a class="module-link" href={withBase(href)}><strong>{label}</strong><span>{desc}</span></a>)}
-        </div>
-      </section>
       <footer class="footer">© 2026 Industrial Vision Atlas CN · 工业视觉选型工程手册</footer>
     </div>
   </body>
