@@ -1,5 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import {mistakes} from '../data/vision';
+import { mistakes } from '../data/vision';
 ---
-<BaseLayout><h1>工业视觉常见误区</h1>{mistakes.map(m=><div class="card"><p>❌ {m}</p></div>)}</BaseLayout>
+<BaseLayout title="常见误区" description="工业视觉项目常见失败原因">
+  <section class="hero">
+    <span class="kicker">Failure Notes</span>
+    <h1>视觉项目常见误区</h1>
+    <p class="hero-subtitle">很多项目失败不是算法不行，而是成像、节拍、验收和现场条件没有处理好。</p>
+  </section>
+  <section class="section">
+    <div class="grid">
+      {mistakes.map((m, i) => <article class="card warning"><span class="tag">误区 {i + 1}</span><h2>{m}</h2><p>先回到检测目标、光学方案、验收指标和现场条件重新判断。</p></article>)}
+    </div>
+  </section>
+</BaseLayout>
