@@ -1,16 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { mistakes } from '../data/vision';
+import { withBase } from '../consts';
 ---
-<BaseLayout title="常见误区" description="工业视觉项目常见失败原因">
+<BaseLayout title="常见问题" description="工业视觉项目常见问题">
   <section class="hero">
     <span class="kicker">Failure Notes</span>
-    <h1>视觉项目常见误区</h1>
-    <p class="hero-subtitle">很多项目失败不是算法不行，而是成像、节拍、验收和现场条件没有处理好。</p>
+    <h1>视觉项目常见问题</h1>
+    <p class="hero-subtitle">整理成像、节拍、验收、现场条件和算法路线相关的常见问题。</p>
+  </section>
+  <section class="section">
+    <a class="card feature-link" href={withBase('models/')}>
+      <h2>模型选型</h2>
+      <p>查看模型适用条件、数据要求和限制条件。</p>
+    </a>
   </section>
   <section class="section">
     <div class="grid">
-      {mistakes.map((m, i) => <article class="card warning"><span class="tag">误区 {i + 1}</span><h2>{m}</h2><p>先回到检测目标、光学方案、验收指标和现场条件重新判断。</p></article>)}
+      {mistakes.map((m, i) => <article class="card warning"><span class="tag">问题 {i + 1}</span><h2>{m}</h2><p>建议回到检测目标、光学方案、验收指标和现场条件重新评估。</p></article>)}
     </div>
   </section>
 </BaseLayout>
