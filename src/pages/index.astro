@@ -1,29 +1,28 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { overviewGroups } from '../data/knowledge';
-import { withBase } from '../consts';
+import { overviewGroups, opticsGroups, cameraGroups, interfaceGroups, sourceGroups } from '../data/knowledge';
+import { scenarios } from '../data/vision';
+import { modelFamilies } from '../data/models';
 ---
-<BaseLayout title="总览" description="工业视觉信息资料库总览">
-  <section class="hero">
+<BaseLayout title="总览" description="工业视觉单页信息资料库">
+  <section id="overview" class="hero">
     <span class="kicker">Industrial Vision Reference</span>
     <h1 class="hero-title">工业视觉信息资料库</h1>
-    <p class="hero-subtitle">按系统构成整理工业视觉基础信息：成像、光学、相机、接口、算法、控制输出和资料来源。内容优先参考标准组织、行业协会、官方文档和主流厂商知识库。</p>
+    <p class="hero-subtitle">一页整理工业视觉的核心信息：系统构成、成像光学、相机传感器、接口标准、算法模型、典型场景和资料来源。内容优先参考标准组织、行业协会、官方文档和主流厂商知识库。</p>
   </section>
 
-  <section class="section">
-    <h2 class="section-title">信息模块</h2>
-    <div class="grid">
-      <a class="card" href={withBase('optics/')}><h3>成像与光学</h3><p>光源、镜头、视野、工作距离、景深、畸变、远心镜头。</p></a>
-      <a class="card" href={withBase('cameras/')}><h3>相机与传感器</h3><p>面阵、线扫、3D 相机、智能相机、分辨率、快门、帧率、动态范围。</p></a>
-      <a class="card" href={withBase('interfaces/')}><h3>接口与采集</h3><p>GenICam、GigE Vision、USB3 Vision、Camera Link、CoaXPress、采集卡。</p></a>
-      <a class="card" href={withBase('models/')}><h3>算法与模型</h3><p>规则视觉、目标检测、分割、OCR、异常检测、姿态估计、3D 点云。</p></a>
-      <a class="card" href={withBase('scenarios/')}><h3>场景资料</h3><p>尺寸测量、外观缺陷、OCR、机器人定位、连续材料、3D 检测。</p></a>
-      <a class="card" href={withBase('sources/')}><h3>资料来源</h3><p>EMVA、A3、GenICam、EMVA 1288、Cognex、OpenCV、PaddleOCR、Anomalib。</p></a>
-    </div>
+  <section class="section quick-index" aria-label="页面目录">
+    <a href="#system">系统构成</a>
+    <a href="#optics">成像与光学</a>
+    <a href="#cameras">相机与传感器</a>
+    <a href="#interfaces">接口标准</a>
+    <a href="#algorithms">算法与模型</a>
+    <a href="#scenarios">典型场景</a>
+    <a href="#sources">资料来源</a>
   </section>
 
   {overviewGroups.map(group => (
-    <section class="section">
+    <section id="system" class="section anchor-section">
       <h2 class="section-title">{group.title}</h2>
       <p class="section-lead">{group.intro}</p>
       <div class="grid">
@@ -31,4 +30,89 @@ import { withBase } from '../consts';
       </div>
     </section>
   ))}
+
+  <section id="optics" class="section anchor-section">
+    <h2 class="section-title">成像与光学</h2>
+    {opticsGroups.map(group => (
+      <div class="subsection">
+        <h3>{group.title}</h3>
+        <p class="section-lead">{group.intro}</p>
+        <div class="grid">
+          {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">来源：{item.source}</p></article>)}
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <section id="cameras" class="section anchor-section">
+    <h2 class="section-title">相机与传感器</h2>
+    {cameraGroups.map(group => (
+      <div class="subsection">
+        <h3>{group.title}</h3>
+        <p class="section-lead">{group.intro}</p>
+        <div class="grid">
+          {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">来源：{item.source}</p></article>)}
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <section id="interfaces" class="section anchor-section">
+    <h2 class="section-title">接口与采集标准</h2>
+    {interfaceGroups.map(group => (
+      <div class="subsection">
+        <p class="section-lead">{group.intro}</p>
+        <div class="grid">
+          {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">来源：{item.source}</p></article>)}
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <section id="algorithms" class="section anchor-section">
+    <h2 class="section-title">算法与模型</h2>
+    <p class="section-lead">整理工业视觉常见算法类别、适用任务、数据要求和部署方式。算法效果依赖成像质量、样本覆盖、标注质量和现场工况稳定性。</p>
+    <div class="grid">
+      {modelFamilies.map(m => (
+        <article class="card compact-card">
+          <span class="tag">{m.category}</span>
+          <h3>{m.name}</h3>
+          <p><strong>适用任务：</strong>{m.bestFor.join('、')}</p>
+          <p><strong>常见方法：</strong>{m.typicalModels.join('、')}</p>
+          <p><strong>数据要求：</strong>{m.dataNeed}</p>
+          <p><strong>部署方式：</strong>{m.deployment.join('、')}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="scenarios" class="section anchor-section">
+    <h2 class="section-title">典型场景</h2>
+    <p class="section-lead">场景资料用于连接检测任务与系统组成。这里保留摘要信息，避免把页面变成报价方案或型号推荐。</p>
+    <div class="grid">
+      {scenarios.map(s => (
+        <article class="card compact-card">
+          <span class="tag">{s.category}</span>
+          <h3>{s.title}</h3>
+          <p><strong>对象：</strong>{s.items.join('、')}</p>
+          <p><strong>成像：</strong>{s.imaging}</p>
+          <p><strong>光源：</strong>{s.lighting}</p>
+          <p><strong>算法：</strong>{s.algorithm}</p>
+          <p><strong>验收：</strong>{s.acceptance.join('、')}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="sources" class="section anchor-section">
+    <h2 class="section-title">资料来源</h2>
+    {sourceGroups.map(group => (
+      <div class="subsection">
+        <p class="section-lead">{group.intro}</p>
+        <div class="grid">
+          {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">{item.source}</p></article>)}
+        </div>
+      </div>
+    ))}
+  </section>
 </BaseLayout>
