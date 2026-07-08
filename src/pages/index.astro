@@ -1,13 +1,41 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import {scenarios,components,flows} from '../data/vision';
+import { scenarios, components, flows, mistakes } from '../data/vision';
+import { withBase } from '../consts';
 ---
-<BaseLayout>
-<section class="hero"><h1>工业视觉选型地图</h1><p>从检测场景出发，选择成像方案、光学组件、算法路线和部署方式。</p></section>
-<h2>选型流程</h2>
-{flows.map(f=><div class="flow"><b>{f[0]}</b> → {f[1]}</div>)}
-<h2>核心模块</h2>
-<div class="grid">{components.map(c=><div class="card"><h3>{c.type}</h3><p>{c.key}</p>{c.choices.map(x=><span class="tag">{x}</span>)}</div>)}</div>
-<h2>检测场景</h2>
-<div class="grid">{scenarios.map(s=><div class="card"><h3>{s.title}</h3><p>{s.route}</p></div>)}</div>
+<BaseLayout title="首页">
+  <section class="hero">
+    <span class="kicker">Industrial Vision Atlas</span>
+    <h1 class="hero-title">工业视觉不是买相机，而是设计成像系统</h1>
+    <p class="hero-subtitle">从检测任务出发，反推工件特征、光源、镜头、相机、算法和部署方式。纯静态、可部署到 GitHub Pages。</p>
+  </section>
+
+  <section class="section">
+    <div class="grid">
+      <a class="card" href={withBase('flows/')}><h3>选型流程</h3><p>按检测目标、工件特性、视野精度、光学方案和部署验收逐步判断。</p></a>
+      <a class="card" href={withBase('scenarios/')}><h3>检测场景</h3><p>外观缺陷、尺寸测量、OCR、机器人定位、线扫和 3D 检测。</p></a>
+      <a class="card" href={withBase('components/')}><h3>组件选型</h3><p>相机、镜头、光源、接口、算法和部署组件的适用边界。</p></a>
+      <a class="card" href={withBase('playbooks/')}><h3>行业方案</h3><p>3C、新能源、机械加工、包装食品等项目手册。</p></a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">核心流程</h2>
+    {flows.map((f, i) => <div class="flow"><div class="flow-num">{i + 1}</div><div><h3>{f.title}</h3><p>{f.question}</p><p><strong>输出：</strong>{f.output}</p></div></div>)}
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">检测场景</h2>
+    <div class="grid">{scenarios.slice(0, 6).map(s => <article class="card"><h3>{s.title}</h3><p>{s.route}</p><span class="tag">{s.category}</span></article>)}</div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">组件模块</h2>
+    <div class="grid">{components.map(c => <article class="card"><h3>{c.type}</h3><p>{c.key}</p>{c.choices.map(x => <span class="tag">{x}</span>)}</article>)}</div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">常见错误</h2>
+    <div class="grid">{mistakes.slice(0, 4).map(m => <article class="card warning"><strong>{m}</strong></article>)}</div>
+  </section>
 </BaseLayout>
