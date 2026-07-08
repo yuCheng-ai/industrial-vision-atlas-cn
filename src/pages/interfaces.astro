@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { interfaceGroups } from '../data/knowledge';
+---
+<BaseLayout title="接口标准" description="工业视觉接口、采集和相机标准资料">
+  <section class="hero">
+    <span class="kicker">Interfaces & Standards</span>
+    <h1>接口与采集标准</h1>
+    <p class="hero-subtitle">整理工业相机接口、采集卡、传输标准和相机通用接口信息。</p>
+  </section>
+  {interfaceGroups.map(group => (
+    <section class="section">
+      <h2 class="section-title">{group.title}</h2>
+      <p class="section-lead">{group.intro}</p>
+      <div class="grid">
+        {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">来源：{item.source}</p></article>)}
+      </div>
+    </section>
+  ))}
+</BaseLayout>
