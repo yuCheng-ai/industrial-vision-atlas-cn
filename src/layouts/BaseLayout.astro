@@ -8,7 +8,7 @@ export interface Props {
 }
 const { title, description } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
-const pageDesc = description ?? '工业视觉信息资料库：成像、光学、相机、接口、标定、算法、场景和资料来源。';
+const pageDesc = description ?? '工业视觉信息资料库：成像、光学、相机、接口、标定、算法、模型、场景和资料来源。';
 const anchor = (id: string) => `${withBase('')}#${id}`;
 const navGroups = [
   {
@@ -31,7 +31,8 @@ const navGroups = [
   {
     title: '软件与应用',
     items: [
-      ['算法与模型', anchor('algorithms')],
+      ['算法方法', anchor('algorithms')],
+      ['模型', anchor('models')],
       ['典型场景', anchor('scenarios')],
       ['资料来源', anchor('sources')],
     ],
