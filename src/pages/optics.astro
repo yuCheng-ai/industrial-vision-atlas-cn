@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { opticsGroups } from '../data/knowledge';
+---
+<BaseLayout title="成像与光学" description="工业视觉成像、光源和镜头资料">
+  <section class="hero">
+    <span class="kicker">Imaging & Optics</span>
+    <h1>成像与光学</h1>
+    <p class="hero-subtitle">记录工业视觉中光源、镜头和成像参数的基础信息。该部分用于理解图像形成条件，不作为品牌或型号推荐。</p>
+  </section>
+  {opticsGroups.map(group => (
+    <section class="section">
+      <h2 class="section-title">{group.title}</h2>
+      <p class="section-lead">{group.intro}</p>
+      <div class="grid">
+        {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">来源：{item.source}</p></article>)}
+      </div>
+    </section>
+  ))}
+</BaseLayout>
