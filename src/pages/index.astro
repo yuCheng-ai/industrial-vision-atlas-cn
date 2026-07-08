@@ -104,16 +104,22 @@ const layers = [
 
   <section id="algorithms" class="section anchor-section">
     <h2 class="section-title">算法与模型</h2>
-    <p class="section-lead">算法部分记录从图像或点云中提取结果的方法。资料按任务、常见方法、数据要求和部署方式组织。</p>
-    <div class="reference-grid">
+    <p class="section-lead">算法部分记录从图像或点云中提取结果的方法。每个条目保留适用任务、关键参数、性能指标、数据要求、部署方式和来源。</p>
+    <div class="model-list">
       {modelFamilies.map(m => (
-        <article class="card compact-card">
-          <span class="tag">{m.category}</span>
-          <h3>{m.name}</h3>
-          <p><strong>适用任务：</strong>{m.bestFor.join('、')}</p>
-          <p><strong>常见方法：</strong>{m.typicalModels.join('、')}</p>
-          <p><strong>数据要求：</strong>{m.dataNeed}</p>
-          <p><strong>部署方式：</strong>{m.deployment.join('、')}</p>
+        <article class="model-card">
+          <header>
+            <span class="tag">{m.category}</span>
+            <h3>{m.name}</h3>
+          </header>
+          <div class="model-detail-grid">
+            <p><strong>适用任务：</strong>{m.bestFor.join('、')}</p>
+            <p><strong>常见方法：</strong>{m.typicalModels.join('、')}</p>
+            <p><strong>关键参数：</strong>{m.keyParameters.join('、')}</p>
+            <p><strong>性能指标：</strong>{m.performanceMetrics.join('、')}</p>
+            <p><strong>数据要求：</strong>{m.dataNeed}</p>
+            <p><strong>部署方式：</strong>{m.deployment.join('、')}</p>
+          </div>
           <p class="source-line">来源：{m.source}</p>
         </article>
       ))}
