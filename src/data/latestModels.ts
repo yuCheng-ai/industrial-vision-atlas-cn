@@ -2,6 +2,18 @@ import type { ModelCatalogItem } from './models';
 
 export const latestModelCatalog: ModelCatalogItem[] = [
   {
+    name: 'CVOCA',
+    type: '复数值光学卷积加速器',
+    description: 'CVOCA 是 Nature Communications 2025 年论文提出的 complex-valued optical convolution accelerator。它不是普通软件 CNN，而是面向复数值数据的光学神经形态硬件，用光学系统加速复数值卷积，显式处理幅度和相位信息。',
+    input: '复数值数据流、波相关信号、SAR 图像；输入可表示为幅度和相位，或实部和虚部。',
+    output: '复数值卷积特征、实部/虚部特征图、用于后续分类或识别的压缩特征。',
+    parameters: ['复数输入 X 的幅度与相位', '复数卷积核 W 的幅度与相位', '3×3 复数卷积核', '微梳 wavelength channels', 'CVEOM 调制', 'symbol duration T', 'wavelength synthesizing', 'time-wavelength interleaving'],
+    metrics: ['>2 TOPS', 'SAR 识别准确率 83.8%', 'in-silico 准确率 85.4%', '13.7 million 100×100 SAR images/s', '500 SAR samples', '相位敏感特征提取能力'],
+    useCases: ['SAR 图像识别', '卫星遥感', '雷达信号', '通信信号', '相位敏感数据', '波相关高维数据流'],
+    limits: ['这是硬件加速器而不是可直接下载训练的软件模型', '实验主要验证复数值 SAR 和波相关数据', '普通 RGB 外观检测不一定受益', '工程落地依赖光学硬件、调制器、微梳和系统校准'],
+    source: 'Nature Communications：TOPS-speed complex-valued convolutional accelerator for feature extraction and inference, 2025, Article number 292',
+  },
+  {
     name: 'YOLO26',
     type: '最新实时视觉模型系列',
     description: 'Ultralytics 文档将 YOLO26 标为最新一代 YOLO 模型。该系列面向实时视觉任务，强调端到端 NMS-free 推理、边缘部署，并覆盖检测、分割、分类、姿态估计、旋转框等任务。',
