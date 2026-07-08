@@ -8,14 +8,14 @@ export interface Props {
 }
 const { title, description } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
-const pageDesc = description ?? '工业视觉信息资料库：成像、光学、相机、接口、算法、术语和资料来源。';
+const pageDesc = description ?? '工业视觉信息资料库：成像、光学、相机、接口、标定、算法、场景和资料来源。';
 const anchor = (id: string) => `${withBase('')}#${id}`;
 const navGroups = [
   {
     title: '基础结构',
     items: [
       ['总览', anchor('overview')],
-      ['系统分层', anchor('layers')],
+      ['信息链路', anchor('layers')],
       ['系统构成', anchor('system')],
     ],
   },
@@ -25,6 +25,7 @@ const navGroups = [
       ['成像与光学', anchor('optics')],
       ['相机与传感器', anchor('cameras')],
       ['接口与采集', anchor('interfaces')],
+      ['标定与测量', anchor('calibration')],
     ],
   },
   {
@@ -57,7 +58,7 @@ const navGroups = [
             </div>
           ))}
         </nav>
-        <p class="sidebar-note">优先参考标准组织、行业协会、官方文档和主流厂商知识库。</p>
+        <p class="sidebar-note">参考标准组织、行业协会、官方文档和主流厂商知识库。</p>
       </aside>
       <div class="content-shell">
         <main><slot /></main>
