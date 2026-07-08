@@ -1,5 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import {glossary} from '../data/vision';
+import { glossary } from '../data/vision';
 ---
-<BaseLayout><h1>工业视觉术语</h1><div class="grid">{glossary.map(g=><div class="card"><h2>{g[0]}</h2><p>{g[1]}</p></div>)}</div></BaseLayout>
+<BaseLayout title="术语表" description="工业视觉术语解释">
+  <section class="hero">
+    <span class="kicker">Glossary</span>
+    <h1>工业视觉术语表</h1>
+    <p class="hero-subtitle">把常见参数和英文缩写翻译成工程语言。</p>
+  </section>
+  <section class="section">
+    <div class="grid">
+      {glossary.map(g => <article class="card"><h2>{g[0]}</h2><p>{g[1]}</p></article>)}
+    </div>
+  </section>
+</BaseLayout>
