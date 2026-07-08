@@ -1,49 +1,28 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { modelSelectionRules } from '../data/models';
+import { modelFamilies } from '../data/models';
 ---
-<BaseLayout title="算法路线" description="工业视觉算法路线选型">
+<BaseLayout title="算法与模型" description="工业视觉算法与模型资料">
   <section class="hero">
-    <span class="kicker">Algorithm Route</span>
-    <h1>从检测任务到算法路线</h1>
-    <p class="hero-subtitle">先判断任务类型、成像条件、精度要求和样本情况，再确定规则视觉、目标检测、分割、OCR、异常检测或 3D 方案。</p>
+    <span class="kicker">Algorithms & Models</span>
+    <h1>算法与模型</h1>
+    <p class="hero-subtitle">整理工业视觉常见算法类别、适用任务、数据要求和部署方式。该页面作为资料索引，不提供单一推荐结论。</p>
   </section>
 
   <section class="section">
-    <h2 class="section-title">判断顺序</h2>
-    <div class="flow">
-      <div class="flow-num">1</div>
-      <div><h3>先看任务</h3><p>测量、识别、定位、缺陷检测、字符读取、3D 检测，对应的算法路线不同。</p></div>
-    </div>
-    <div class="flow">
-      <div class="flow-num">2</div>
-      <div><h3>再看成像</h3><p>如果图像中目标边界、缺陷对比度或字符质量不稳定，模型效果通常也不稳定。</p></div>
-    </div>
-    <div class="flow">
-      <div class="flow-num">3</div>
-      <div><h3>最后看样本</h3><p>缺陷样本数量、正常样本波动、标注成本和部署算力，决定是否采用检测、分割或异常检测。</p></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2 class="section-title">任务路线</h2>
-    <div class="matrix">
-      <table>
-        <thead><tr><th>检测任务</th><th>优先路线</th><th>判断重点</th></tr></thead>
-        <tbody>
-          {modelSelectionRules.map(row => <tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td></tr>)}
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2 class="section-title">基本原则</h2>
+    <h2 class="section-title">算法类别</h2>
     <div class="grid">
-      <article class="card"><h3>测量优先看边缘和标定</h3><p>尺寸、孔位、间隙等任务，核心是成像稳定、镜头畸变、标定误差和重复精度。</p></article>
-      <article class="card"><h3>缺陷优先看对比度</h3><p>划痕、污渍、压伤等任务，先确认缺陷是否能被光源稳定显现，再选择规则、分割或异常检测。</p></article>
-      <article class="card"><h3>识别优先看字符质量</h3><p>OCR 和读码任务，先检查字符高度、清晰度、反光、角度和运动模糊。</p></article>
-      <article class="card"><h3>定位要包含坐标链路</h3><p>机器人定位任务不仅是模型输出，还包括相机标定、手眼标定和执行误差验证。</p></article>
+      {modelFamilies.map(m => (
+        <article class="card compact-card">
+          <span class="tag">{m.category}</span>
+          <h2>{m.name}</h2>
+          <p><strong>适用任务：</strong>{m.bestFor.join('、')}</p>
+          <p><strong>常见模型 / 方法：</strong>{m.typicalModels.join('、')}</p>
+          <p><strong>数据要求：</strong>{m.dataNeed}</p>
+          <p><strong>部署方式：</strong>{m.deployment.join('、')}</p>
+          <p class="source-line">说明：{m.note}</p>
+        </article>
+      ))}
     </div>
   </section>
 </BaseLayout>
