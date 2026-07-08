@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { overviewGroups, opticsGroups, cameraGroups, interfaceGroups, calibrationGroups, sourceGroups } from '../data/knowledge';
 import { scenarios } from '../data/vision';
-import { modelFamilies } from '../data/models';
+import { modelFamilies, modelCatalog } from '../data/models';
 
 const layers = [
   ['对象与现场', '工件材质、表面状态、运动方式、节拍、环境光、振动、粉尘、安装空间。'],
@@ -103,22 +103,41 @@ const layers = [
   </section>
 
   <section id="algorithms" class="section anchor-section">
-    <h2 class="section-title">算法与模型</h2>
-    <p class="section-lead">算法部分记录从图像或点云中提取结果的方法。每个条目保留适用任务、关键参数、性能指标、数据要求、部署方式和来源。</p>
-    <div class="model-list">
+    <h2 class="section-title">算法方法</h2>
+    <p class="section-lead">算法方法用于描述处理路径，例如阈值分割、边缘检测、目标检测、分割、OCR、异常检测、关键点和点云处理。该部分按方法类别记录，不展开具体模型。</p>
+    <div class="reference-grid">
       {modelFamilies.map(m => (
+        <article class="card compact-card">
+          <span class="tag">{m.category}</span>
+          <h3>{m.name}</h3>
+          <p><strong>适用任务：</strong>{m.bestFor.join('、')}</p>
+          <p><strong>常见方法：</strong>{m.typicalModels.join('、')}</p>
+          <p><strong>关键参数：</strong>{m.keyParameters.join('、')}</p>
+          <p><strong>性能指标：</strong>{m.performanceMetrics.join('、')}</p>
+          <p class="source-line">来源：{m.source}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="models" class="section anchor-section">
+    <h2 class="section-title">模型</h2>
+    <p class="section-lead">模型条目记录具体模型或模型系列。每个条目说明模型用途、输入、输出、关键参数、性能指标、适用场景、限制条件和资料来源。</p>
+    <div class="model-list">
+      {modelCatalog.map(m => (
         <article class="model-card">
           <header>
-            <span class="tag">{m.category}</span>
+            <span class="tag">{m.type}</span>
             <h3>{m.name}</h3>
           </header>
+          <p>{m.description}</p>
           <div class="model-detail-grid">
-            <p><strong>适用任务：</strong>{m.bestFor.join('、')}</p>
-            <p><strong>常见方法：</strong>{m.typicalModels.join('、')}</p>
-            <p><strong>关键参数：</strong>{m.keyParameters.join('、')}</p>
-            <p><strong>性能指标：</strong>{m.performanceMetrics.join('、')}</p>
-            <p><strong>数据要求：</strong>{m.dataNeed}</p>
-            <p><strong>部署方式：</strong>{m.deployment.join('、')}</p>
+            <p><strong>输入：</strong>{m.input}</p>
+            <p><strong>输出：</strong>{m.output}</p>
+            <p><strong>关键参数：</strong>{m.parameters.join('、')}</p>
+            <p><strong>性能指标：</strong>{m.metrics.join('、')}</p>
+            <p><strong>适用场景：</strong>{m.useCases.join('、')}</p>
+            <p><strong>限制条件：</strong>{m.limits.join('、')}</p>
           </div>
           <p class="source-line">来源：{m.source}</p>
         </article>
