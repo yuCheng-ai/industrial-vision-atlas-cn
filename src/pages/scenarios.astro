@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {scenarios} from '../data/vision';
+---
+<BaseLayout><h1>检测场景</h1><div class="grid">{scenarios.map(s=><div class="card"><h2>{s.title}</h2><p>{s.route}</p>{s.items.map(i=><span class="tag">{i}</span>)}</div>)}</div></BaseLayout>
