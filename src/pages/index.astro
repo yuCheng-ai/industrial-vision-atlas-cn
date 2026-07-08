@@ -3,29 +3,44 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { overviewGroups, opticsGroups, cameraGroups, interfaceGroups, sourceGroups } from '../data/knowledge';
 import { scenarios } from '../data/vision';
 import { modelFamilies } from '../data/models';
+
+const layers = [
+  ['对象与现场', '工件材质、表面状态、运动方式、节拍、环境光、振动、粉尘、安装空间。'],
+  ['成像与光学', '光源、镜头、视野、工作距离、景深、畸变、滤光、偏振和机械安装。'],
+  ['图像采集', '相机类型、传感器、分辨率、曝光、快门、帧率、动态范围和触发方式。'],
+  ['传输与同步', 'GigE Vision、USB3 Vision、Camera Link、CoaXPress、GenICam、采集卡、编码器和多相机同步。'],
+  ['处理与算法', '预处理、定位、测量、OCR、读码、目标检测、分割、异常检测、点云和高度图处理。'],
+  ['输出与集成', 'OK/NG、尺寸数值、坐标、缺陷类别、读码结果、PLC、机器人、MES、追溯和报警。'],
+];
 ---
 <BaseLayout title="总览" description="工业视觉单页信息资料库">
   <section id="overview" class="hero">
     <span class="kicker">Industrial Vision Reference</span>
     <h1 class="hero-title">工业视觉信息资料库</h1>
-    <p class="hero-subtitle">一页整理工业视觉的核心信息：系统构成、成像光学、相机传感器、接口标准、算法模型、典型场景和资料来源。内容优先参考标准组织、行业协会、官方文档和主流厂商知识库。</p>
+    <p class="hero-subtitle">工业视觉系统不是单个相机或单个算法，而是由现场条件、光学成像、图像采集、数据传输、算法处理和工业控制共同组成。本文按系统层次整理核心信息，并在条目中保留资料来源。</p>
   </section>
 
-  <section class="section quick-index" aria-label="页面目录">
-    <a href="#system">系统构成</a>
-    <a href="#optics">成像与光学</a>
-    <a href="#cameras">相机与传感器</a>
-    <a href="#interfaces">接口标准</a>
-    <a href="#algorithms">算法与模型</a>
-    <a href="#scenarios">典型场景</a>
-    <a href="#sources">资料来源</a>
+  <section id="layers" class="section anchor-section">
+    <h2 class="section-title">系统分层</h2>
+    <p class="section-lead">按照信息流组织内容：先有被测对象和现场条件，再形成图像，随后采集、传输、处理，最后输出结果并接入产线控制。</p>
+    <div class="layer-list">
+      {layers.map((layer, index) => (
+        <article class="layer-item">
+          <div class="layer-index">{index + 1}</div>
+          <div>
+            <h3>{layer[0]}</h3>
+            <p>{layer[1]}</p>
+          </div>
+        </article>
+      ))}
+    </div>
   </section>
 
   {overviewGroups.map(group => (
     <section id="system" class="section anchor-section">
       <h2 class="section-title">{group.title}</h2>
       <p class="section-lead">{group.intro}</p>
-      <div class="grid">
+      <div class="reference-grid">
         {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">来源：{item.source}</p></article>)}
       </div>
     </section>
@@ -33,11 +48,12 @@ import { modelFamilies } from '../data/models';
 
   <section id="optics" class="section anchor-section">
     <h2 class="section-title">成像与光学</h2>
+    <p class="section-lead">光学部分决定图像里能看到什么、看得多稳定。光源和镜头参数通常应先于算法效果讨论。</p>
     {opticsGroups.map(group => (
       <div class="subsection">
         <h3>{group.title}</h3>
         <p class="section-lead">{group.intro}</p>
-        <div class="grid">
+        <div class="reference-grid">
           {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">来源：{item.source}</p></article>)}
         </div>
       </div>
@@ -46,11 +62,12 @@ import { modelFamilies } from '../data/models';
 
   <section id="cameras" class="section anchor-section">
     <h2 class="section-title">相机与传感器</h2>
+    <p class="section-lead">相机参数需要放在视野、精度、速度、接口和光照条件中理解。单独比较分辨率通常没有意义。</p>
     {cameraGroups.map(group => (
       <div class="subsection">
         <h3>{group.title}</h3>
         <p class="section-lead">{group.intro}</p>
-        <div class="grid">
+        <div class="reference-grid">
           {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">来源：{item.source}</p></article>)}
         </div>
       </div>
@@ -59,10 +76,11 @@ import { modelFamilies } from '../data/models';
 
   <section id="interfaces" class="section anchor-section">
     <h2 class="section-title">接口与采集标准</h2>
+    <p class="section-lead">接口层连接相机与处理设备，影响带宽、距离、同步、采集卡需求和软件兼容性。</p>
     {interfaceGroups.map(group => (
       <div class="subsection">
         <p class="section-lead">{group.intro}</p>
-        <div class="grid">
+        <div class="reference-grid">
           {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">来源：{item.source}</p></article>)}
         </div>
       </div>
@@ -71,8 +89,8 @@ import { modelFamilies } from '../data/models';
 
   <section id="algorithms" class="section anchor-section">
     <h2 class="section-title">算法与模型</h2>
-    <p class="section-lead">整理工业视觉常见算法类别、适用任务、数据要求和部署方式。算法效果依赖成像质量、样本覆盖、标注质量和现场工况稳定性。</p>
-    <div class="grid">
+    <p class="section-lead">算法用于从图像或点云中提取结果。不同算法对成像质量、样本数量、标注质量、实时性和部署硬件的要求不同。</p>
+    <div class="reference-grid">
       {modelFamilies.map(m => (
         <article class="card compact-card">
           <span class="tag">{m.category}</span>
@@ -88,12 +106,14 @@ import { modelFamilies } from '../data/models';
 
   <section id="scenarios" class="section anchor-section">
     <h2 class="section-title">典型场景</h2>
-    <p class="section-lead">场景资料用于连接检测任务与系统组成。这里保留摘要信息，避免把页面变成报价方案或型号推荐。</p>
-    <div class="grid">
+    <p class="section-lead">场景资料把任务、成像、光源、相机、镜头、算法和验收指标关联起来。这里保留摘要，不做品牌和型号推荐。</p>
+    <div class="scenario-list">
       {scenarios.map(s => (
-        <article class="card compact-card">
-          <span class="tag">{s.category}</span>
-          <h3>{s.title}</h3>
+        <article class="scenario-row">
+          <div>
+            <span class="tag">{s.category}</span>
+            <h3>{s.title}</h3>
+          </div>
           <p><strong>对象：</strong>{s.items.join('、')}</p>
           <p><strong>成像：</strong>{s.imaging}</p>
           <p><strong>光源：</strong>{s.lighting}</p>
@@ -106,10 +126,11 @@ import { modelFamilies } from '../data/models';
 
   <section id="sources" class="section anchor-section">
     <h2 class="section-title">资料来源</h2>
+    <p class="section-lead">优先采用标准组织、行业协会、官方文档和主流厂商知识库。经验判断应与标准定义、参数文档和现场验证区分开。</p>
     {sourceGroups.map(group => (
       <div class="subsection">
         <p class="section-lead">{group.intro}</p>
-        <div class="grid">
+        <div class="reference-grid">
           {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">{item.source}</p></article>)}
         </div>
       </div>
