@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { overviewGroups, opticsGroups, cameraGroups, interfaceGroups, sourceGroups } from '../data/knowledge';
+import { overviewGroups, opticsGroups, cameraGroups, interfaceGroups, calibrationGroups, sourceGroups } from '../data/knowledge';
 import { scenarios } from '../data/vision';
 import { modelFamilies } from '../data/models';
 
@@ -9,6 +9,7 @@ const layers = [
   ['成像与光学', '光源、镜头、视野、工作距离、景深、畸变、滤光、偏振和机械安装。'],
   ['图像采集', '相机类型、传感器、分辨率、曝光、快门、帧率、动态范围和触发方式。'],
   ['传输与同步', 'GigE Vision、USB3 Vision、Camera Link、CoaXPress、GenICam、采集卡、编码器和多相机同步。'],
+  ['标定与测量', '像素比例、畸变校正、外参、手眼标定、重复性和复验条件。'],
   ['处理与算法', '预处理、定位、测量、OCR、读码、目标检测、分割、异常检测、点云和高度图处理。'],
   ['输出与集成', 'OK/NG、尺寸数值、坐标、缺陷类别、读码结果、PLC、机器人、MES、追溯和报警。'],
 ];
@@ -17,12 +18,12 @@ const layers = [
   <section id="overview" class="hero">
     <span class="kicker">Industrial Vision Reference</span>
     <h1 class="hero-title">工业视觉信息资料库</h1>
-    <p class="hero-subtitle">工业视觉系统不是单个相机或单个算法，而是由现场条件、光学成像、图像采集、数据传输、算法处理和工业控制共同组成。本文按系统层次整理核心信息，并在条目中保留资料来源。</p>
+    <p class="hero-subtitle">按现场条件、光学成像、图像采集、数据传输、标定测量、算法处理和工业控制整理工业视觉核心资料。条目保留资料来源，便于区分标准定义、厂商资料、开源文档和工程经验。</p>
   </section>
 
   <section id="layers" class="section anchor-section">
-    <h2 class="section-title">系统分层</h2>
-    <p class="section-lead">按照信息流组织内容：先有被测对象和现场条件，再形成图像，随后采集、传输、处理，最后输出结果并接入产线控制。</p>
+    <h2 class="section-title">信息链路</h2>
+    <p class="section-lead">以下顺序对应工业视觉系统的信息流：被测对象形成图像，图像被采集和传输，经过标定和算法处理后输出到控制系统或数据系统。</p>
     <div class="layer-list">
       {layers.map((layer, index) => (
         <article class="layer-item">
@@ -48,7 +49,7 @@ const layers = [
 
   <section id="optics" class="section anchor-section">
     <h2 class="section-title">成像与光学</h2>
-    <p class="section-lead">光学部分决定图像里能看到什么、看得多稳定。光源和镜头参数通常应先于算法效果讨论。</p>
+    <p class="section-lead">光学部分描述图像形成条件，包括照明方向、镜头参数、视野范围、工作距离、景深、畸变和机械安装。</p>
     {opticsGroups.map(group => (
       <div class="subsection">
         <h3>{group.title}</h3>
@@ -62,7 +63,7 @@ const layers = [
 
   <section id="cameras" class="section anchor-section">
     <h2 class="section-title">相机与传感器</h2>
-    <p class="section-lead">相机参数需要放在视野、精度、速度、接口和光照条件中理解。单独比较分辨率通常没有意义。</p>
+    <p class="section-lead">相机资料按类型和性能参数组织。分辨率、像元尺寸、快门方式、帧率、动态范围和噪声需要结合视野、速度、接口和光照条件理解。</p>
     {cameraGroups.map(group => (
       <div class="subsection">
         <h3>{group.title}</h3>
@@ -76,7 +77,7 @@ const layers = [
 
   <section id="interfaces" class="section anchor-section">
     <h2 class="section-title">接口与采集标准</h2>
-    <p class="section-lead">接口层连接相机与处理设备，影响带宽、距离、同步、采集卡需求和软件兼容性。</p>
+    <p class="section-lead">接口层连接相机与处理设备，影响带宽、传输距离、同步方式、采集卡需求和软件兼容性。</p>
     {interfaceGroups.map(group => (
       <div class="subsection">
         <p class="section-lead">{group.intro}</p>
@@ -87,9 +88,23 @@ const layers = [
     ))}
   </section>
 
+  <section id="calibration" class="section anchor-section">
+    <h2 class="section-title">标定与测量</h2>
+    <p class="section-lead">标定部分记录像素、物理尺寸、相机坐标、工件坐标和机器人坐标之间的关系。测量、定位和机器人引导场景需要独立记录标定条件和复验方法。</p>
+    {calibrationGroups.map(group => (
+      <div class="subsection">
+        <h3>{group.title}</h3>
+        <p class="section-lead">{group.intro}</p>
+        <div class="reference-grid">
+          {group.items.map(item => <article class="card"><h3>{item.title}</h3><p>{item.body}</p><p class="source-line">来源：{item.source}</p></article>)}
+        </div>
+      </div>
+    ))}
+  </section>
+
   <section id="algorithms" class="section anchor-section">
     <h2 class="section-title">算法与模型</h2>
-    <p class="section-lead">算法用于从图像或点云中提取结果。不同算法对成像质量、样本数量、标注质量、实时性和部署硬件的要求不同。</p>
+    <p class="section-lead">算法部分记录从图像或点云中提取结果的方法。资料按任务、常见方法、数据要求和部署方式组织。</p>
     <div class="reference-grid">
       {modelFamilies.map(m => (
         <article class="card compact-card">
@@ -99,6 +114,7 @@ const layers = [
           <p><strong>常见方法：</strong>{m.typicalModels.join('、')}</p>
           <p><strong>数据要求：</strong>{m.dataNeed}</p>
           <p><strong>部署方式：</strong>{m.deployment.join('、')}</p>
+          <p class="source-line">来源：{m.source}</p>
         </article>
       ))}
     </div>
@@ -106,7 +122,7 @@ const layers = [
 
   <section id="scenarios" class="section anchor-section">
     <h2 class="section-title">典型场景</h2>
-    <p class="section-lead">场景资料把任务、成像、光源、相机、镜头、算法和验收指标关联起来。这里保留摘要，不做品牌和型号推荐。</p>
+    <p class="section-lead">场景资料用于关联任务、成像、光源、相机、镜头、算法和验收指标。该部分保留摘要，不包含品牌和型号推荐。</p>
     <div class="scenario-list">
       {scenarios.map(s => (
         <article class="scenario-row">
@@ -126,7 +142,7 @@ const layers = [
 
   <section id="sources" class="section anchor-section">
     <h2 class="section-title">资料来源</h2>
-    <p class="section-lead">优先采用标准组织、行业协会、官方文档和主流厂商知识库。经验判断应与标准定义、参数文档和现场验证区分开。</p>
+    <p class="section-lead">标准组织和行业协会资料用于接口、相机指标和通用定义；厂商资料用于工程实现和应用说明；开源项目文档用于算法与软件生态。</p>
     {sourceGroups.map(group => (
       <div class="subsection">
         <p class="section-lead">{group.intro}</p>
