@@ -1,19 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { mistakes } from '../data/vision';
-import { withBase } from '../consts';
 ---
 <BaseLayout title="常见问题" description="工业视觉项目常见问题">
   <section class="hero">
     <span class="kicker">Failure Notes</span>
     <h1>视觉项目常见问题</h1>
     <p class="hero-subtitle">整理成像、节拍、验收、现场条件和算法路线相关的常见问题。</p>
-  </section>
-  <section class="section">
-    <a class="card feature-link" href={withBase('models/')}>
-      <h2>模型选型</h2>
-      <p>查看模型适用条件、数据要求和限制条件。</p>
-    </a>
   </section>
   <section class="section">
     <div class="grid">
