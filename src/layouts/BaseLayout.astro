@@ -10,15 +10,31 @@ const { title, description } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
 const pageDesc = description ?? '工业视觉信息资料库：成像、光学、相机、接口、算法、术语和资料来源。';
 const anchor = (id: string) => `${withBase('')}#${id}`;
-const navItems = [
-  ['总览', anchor('overview')],
-  ['系统', anchor('system')],
-  ['光学', anchor('optics')],
-  ['相机', anchor('cameras')],
-  ['接口', anchor('interfaces')],
-  ['算法', anchor('algorithms')],
-  ['场景', anchor('scenarios')],
-  ['来源', anchor('sources')],
+const navGroups = [
+  {
+    title: '基础结构',
+    items: [
+      ['总览', anchor('overview')],
+      ['系统分层', anchor('layers')],
+      ['系统构成', anchor('system')],
+    ],
+  },
+  {
+    title: '成像链路',
+    items: [
+      ['成像与光学', anchor('optics')],
+      ['相机与传感器', anchor('cameras')],
+      ['接口与采集', anchor('interfaces')],
+    ],
+  },
+  {
+    title: '软件与应用',
+    items: [
+      ['算法与模型', anchor('algorithms')],
+      ['典型场景', anchor('scenarios')],
+      ['资料来源', anchor('sources')],
+    ],
+  },
 ];
 ---
 <html lang="zh-CN">
@@ -29,15 +45,24 @@ const navItems = [
     <meta name="description" content={pageDesc} />
   </head>
   <body>
-    <div class="page">
-      <nav class="nav">
-        <a class="logo" href={withBase('')}>{SITE_TITLE}</a>
-        <div class="nav-links">
-          {navItems.map(([label, href]) => <a href={href}>{label}</a>)}
-        </div>
-      </nav>
-      <main><slot /></main>
-      <footer class="footer">© 2026 Industrial Vision Atlas CN · 工业视觉信息资料库</footer>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href={withBase('')}>{SITE_TITLE}</a>
+        <p class="sidebar-desc">工业视觉信息资料库</p>
+        <nav class="side-nav" aria-label="页面目录">
+          {navGroups.map(group => (
+            <div class="side-group">
+              <div class="side-title">{group.title}</div>
+              {group.items.map(([label, href]) => <a href={href}>{label}</a>)}
+            </div>
+          ))}
+        </nav>
+        <p class="sidebar-note">优先参考标准组织、行业协会、官方文档和主流厂商知识库。</p>
+      </aside>
+      <div class="content-shell">
+        <main><slot /></main>
+        <footer class="footer">© 2026 Industrial Vision Atlas CN · 工业视觉信息资料库</footer>
+      </div>
     </div>
   </body>
 </html>
