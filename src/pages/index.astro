@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { overviewGroups, opticsGroups, cameraGroups, interfaceGroups, calibrationGroups, sourceGroups } from '../data/knowledge';
 import { scenarios } from '../data/vision';
 import { modelFamilies, modelCatalog } from '../data/models';
+import { latestModelCatalog } from '../data/latestModels';
 
 const layers = [
   ['对象与现场', '工件材质、表面状态、运动方式、节拍、环境光、振动、粉尘、安装空间。'],
@@ -123,25 +124,52 @@ const layers = [
   <section id="models" class="section anchor-section">
     <h2 class="section-title">模型</h2>
     <p class="section-lead">模型条目记录具体模型或模型系列。每个条目说明模型用途、输入、输出、关键参数、性能指标、适用场景、限制条件和资料来源。</p>
-    <div class="model-list">
-      {modelCatalog.map(m => (
-        <article class="model-card">
-          <header>
-            <span class="tag">{m.type}</span>
-            <h3>{m.name}</h3>
-          </header>
-          <p>{m.description}</p>
-          <div class="model-detail-grid">
-            <p><strong>输入：</strong>{m.input}</p>
-            <p><strong>输出：</strong>{m.output}</p>
-            <p><strong>关键参数：</strong>{m.parameters.join('、')}</p>
-            <p><strong>性能指标：</strong>{m.metrics.join('、')}</p>
-            <p><strong>适用场景：</strong>{m.useCases.join('、')}</p>
-            <p><strong>限制条件：</strong>{m.limits.join('、')}</p>
-          </div>
-          <p class="source-line">来源：{m.source}</p>
-        </article>
-      ))}
+    <div class="subsection">
+      <h3>最新补充</h3>
+      <p class="section-lead">该组条目来自最近的官方文档、官方仓库和技术报告。用于记录模型生态变化，不直接作为产线方案结论。</p>
+      <div class="model-list">
+        {latestModelCatalog.map(m => (
+          <article class="model-card">
+            <header>
+              <span class="tag">{m.type}</span>
+              <h3>{m.name}</h3>
+            </header>
+            <p>{m.description}</p>
+            <div class="model-detail-grid">
+              <p><strong>输入：</strong>{m.input}</p>
+              <p><strong>输出：</strong>{m.output}</p>
+              <p><strong>关键参数：</strong>{m.parameters.join('、')}</p>
+              <p><strong>性能指标：</strong>{m.metrics.join('、')}</p>
+              <p><strong>适用场景：</strong>{m.useCases.join('、')}</p>
+              <p><strong>限制条件：</strong>{m.limits.join('、')}</p>
+            </div>
+            <p class="source-line">来源：{m.source}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+    <div class="subsection">
+      <h3>基础模型条目</h3>
+      <div class="model-list">
+        {modelCatalog.map(m => (
+          <article class="model-card">
+            <header>
+              <span class="tag">{m.type}</span>
+              <h3>{m.name}</h3>
+            </header>
+            <p>{m.description}</p>
+            <div class="model-detail-grid">
+              <p><strong>输入：</strong>{m.input}</p>
+              <p><strong>输出：</strong>{m.output}</p>
+              <p><strong>关键参数：</strong>{m.parameters.join('、')}</p>
+              <p><strong>性能指标：</strong>{m.metrics.join('、')}</p>
+              <p><strong>适用场景：</strong>{m.useCases.join('、')}</p>
+              <p><strong>限制条件：</strong>{m.limits.join('、')}</p>
+            </div>
+            <p class="source-line">来源：{m.source}</p>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
