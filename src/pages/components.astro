@@ -1,19 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { components } from '../data/vision';
-import { withBase } from '../consts';
 ---
 <BaseLayout title="组件选型" description="工业视觉相机、镜头、光源、接口、算法选型">
   <section class="hero">
     <span class="kicker">Components</span>
     <h1>视觉组件选型</h1>
-    <p class="hero-subtitle">工业视觉组件不是孤立采购，要按场景、光学和节拍组合。</p>
-  </section>
-  <section class="section">
-    <a class="card feature-link" href={withBase('models/')}>
-      <h2>模型选型</h2>
-      <p>查看模型路线与硬件部署方式的对应关系。</p>
-    </a>
+    <p class="hero-subtitle">按组件类型整理关键参数、适用场景和选型提醒。</p>
   </section>
   <section class="section">
     <div class="grid">
