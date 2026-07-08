@@ -8,13 +8,15 @@ export interface Props {
 }
 const { title, description } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
-const pageDesc = description ?? '工业视觉选型工程手册：检测场景、成像条件、光源、镜头、相机、算法和部署方案。';
+const pageDesc = description ?? '工业视觉信息资料库：成像、光学、相机、接口、算法、术语和资料来源。';
 const navItems = [
-  ['选型流程', 'flows/'],
-  ['检测场景', 'scenarios/'],
-  ['组件选型', 'components/'],
-  ['算法路线', 'models/'],
-  ['行业方案', 'playbooks/'],
+  ['总览', ''],
+  ['成像光学', 'optics/'],
+  ['相机传感器', 'cameras/'],
+  ['接口标准', 'interfaces/'],
+  ['算法模型', 'models/'],
+  ['场景资料', 'scenarios/'],
+  ['资料来源', 'sources/'],
 ];
 ---
 <html lang="zh-CN">
@@ -33,7 +35,7 @@ const navItems = [
         </div>
       </nav>
       <main><slot /></main>
-      <footer class="footer">© 2026 Industrial Vision Atlas CN · 工业视觉选型工程手册</footer>
+      <footer class="footer">© 2026 Industrial Vision Atlas CN · 工业视觉信息资料库</footer>
     </div>
   </body>
 </html>
